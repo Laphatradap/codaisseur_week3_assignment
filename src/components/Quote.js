@@ -1,33 +1,41 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 export default class Quote extends Component {
-  state = {
-    likeColor: null
-  }
+  // state = {
+  //   likedness: null,
+  //   numLikes: 0,
+  //   numDisLikes: 0
+  // };
 
-  likeClicked = () => {
-    this.setState({
-      likeColor: "green"
-    })
-  }
-
-  dislikeClicked = () => {
-    this.setState({
-      likeColor: "red"
-    })
-  }
-
-   
   render() {
-    const {quoteText, quoteAuthor} = this.props
-   
+    const {
+      quoteText,
+      quoteAuthor,
+      likedness,
+      numLikes,
+      numDisLikes,
+      handleClick
+    } = this.props;
+
     return (
       <div>
-       <p style={{color:this.state.likeColor}}>{quoteText}</p>
-       <p style={{color:this.state.likeColor}}>By:{quoteAuthor}</p>
-       <button onClick={this.likeClicked}>Like</button>
-       <button onClick={this.dislikeClicked}>Dislike</button>
+        <h2>
+          Liked: {numLikes}/ DisLiked: {numDisLikes}
+        </h2>
+        <p style={{ color: likedness }}>
+          {quoteText}
+          <br></br>By:
+          {quoteAuthor}
+        </p>
+        <div>
+          <button id="like" onClick={handleClick}>
+            Like
+          </button>
+          <button id="dislike" onClick={handleClick}>
+            Dislike
+          </button>
+        </div>
       </div>
-    )
+    );
   }
 }
