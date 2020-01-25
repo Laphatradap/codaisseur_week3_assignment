@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export default class Quote extends Component {
 
   render() {
-    console.log("propos of Quote", this.props)
+    //console.log("props of Quote", this.props)
     const {
       quoteText,
       quoteAuthor,
@@ -12,7 +12,7 @@ export default class Quote extends Component {
     } = this.props;
 
     return (
-      <div>        
+      <div>
         <p style={{ color: likedness }}>
           {quoteText}
           <br></br>By:

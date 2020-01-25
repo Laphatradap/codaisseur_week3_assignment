@@ -6,7 +6,7 @@ export default class QuoteSearcher extends Component {
   state = {
     loading: true,
     quotes: [],
-    likedness: null,
+    likedness: "",
     numLikes: 0,
     numDisLikes: 0,
     keyword: "tree"
@@ -22,7 +22,7 @@ export default class QuoteSearcher extends Component {
 
       this.setState({
         loading: false,
-        quotes: quoteData
+        quotes: quoteData,
       });
     } catch (error) {
       console.log(error);
@@ -42,27 +42,25 @@ export default class QuoteSearcher extends Component {
     );
   };
 
+
   handleClick = event => {
     const target = event.target
     if(target.id === 'like') {
       this.setState({
         numLikes: this.state.numLikes + 1,
+        likedness: "green"
       })
     } else if (target.id === 'dislike') {
       this.setState({
         numDisLikes: this.state.numDisLikes + 1,
+        likedness: "red"
       })
 
     }
-  }
-
-  // setLiked = (id, liked) => {
-  //   this.setState
-  // }
+  }  
 
   render() {
-    // console.log(this.state.quotes)
-
+    //console.log("state of QuoteSearcher", this.state)
     const data = this.state.quotes.map(quote => {
       return (
         <div>
@@ -71,10 +69,7 @@ export default class QuoteSearcher extends Component {
             quoteAuthor={quote.quoteAuthor}
             quoteId={quote._id}
             key={quote._id}
-            handleClick = {this.handleClick}
-            likedness= {this.state.likedness}
-            numLikes={this.state.numLikes}
-            numDisLikes={this.state.numDisLikes}
+            handleClick={this.handleClick}
           />
         </div>
       );
@@ -88,4 +83,4 @@ export default class QuoteSearcher extends Component {
             </div>
           );
   }
-}
+  }
