@@ -1,16 +1,15 @@
 import React, { Component } from "react";
 import Quote from "./Quote";
-import Searchbar from "./Searchbar"
+import Searchbar from "./Searchbar";
 
 export default class QuoteSearcher extends Component {
   state = {
     loading: true,
     quotes: [],
-    // likedness: null,
-    // numLikes: 0,
-    // numDisLikes: 0,
+    likedness: null,
+    numLikes: 0,
+    numDisLikes: 0,
     keyword: "tree"
-    
   };
 
   getData = async () => {
@@ -22,38 +21,43 @@ export default class QuoteSearcher extends Component {
       const quoteData = parseData.results;
 
       this.setState({
-        loading:false,
+        loading: false,
         quotes: quoteData
-      })
+      });
     } catch (error) {
       console.log(error);
     }
   };
 
-  componentDidMount = async () => this.getData()
+  componentDidMount = async () => this.getData();
 
   searchQuote = searchKeyword => {
-    this.setState({
-      keyword: searchKeyword
-    }, () => {
-      this.getData()
-    })
+    this.setState(
+      {
+        keyword: searchKeyword
+      },
+      () => {
+        this.getData();
+      }
+    );
+  };
+
+  handleClick = event => {
+    const target = event.target
+    if(target.id === 'like') {
+      this.setState({
+        numLikes: this.state.numLikes + 1,
+      })
+    } else if (target.id === 'dislike') {
+      this.setState({
+        numDisLikes: this.state.numDisLikes + 1,
+      })
+
+    }
   }
 
-  // handleClick = event => {
-  //   const target = event.target
-  //   if(target.id === 'like') {
-  //     this.setState({
-  //       numLikes: this.state.numLikes + 1,
-  //       likedness: "green"
-  //     }) 
-  //   } else if (target.id === 'dislike') {
-  //     this.setState({
-  //       numDisLikes: this.state.numDisLikes + 1,
-  //       likedness: "red"
-  //     })
-    
-  //   }
+  // setLiked = (id, liked) => {
+  //   this.setState
   // }
 
   render() {
@@ -62,23 +66,26 @@ export default class QuoteSearcher extends Component {
     const data = this.state.quotes.map(quote => {
       return (
         <div>
-        <Quote 
-        quoteText = {quote.quoteText}
-        quoteAuthor = {quote.quoteAuthor}
-        quoteId = {quote._id}
-        key = {quote._id}
-        // handleClick = {this.handleClick}
-        />
+          <Quote
+            quoteText={quote.quoteText}
+            quoteAuthor={quote.quoteAuthor}
+            quoteId={quote._id}
+            key={quote._id}
+            handleClick = {this.handleClick}
+            likedness= {this.state.likedness}
+            numLikes={this.state.numLikes}
+            numDisLikes={this.state.numDisLikes}
+          />
         </div>
-      )
-    })
-    return this.state.loading ? (
-      <div> Loading... </div>
-    ) :(
-      <div>
-         <Searchbar searchQuote={this.searchQuote}/>
-        {data}
-      </div>
-    );
+      );
+    });
+
+    return this.state.loading ? (<div> Loading...</div>) : (
+            <div>
+             <Searchbar searchQuote={this.searchQuote}/>
+            <div> Liked: {this.state.numLikes} /Disliked: {this.state.numDisLikes}</div>
+            {data}
+            </div>
+          );
   }
 }

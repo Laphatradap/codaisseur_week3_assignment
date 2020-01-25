@@ -1,27 +1,18 @@
 import React, { Component } from "react";
 
 export default class Quote extends Component {
-  // state = {
-  //   likedness: null,
-  //   numLikes: 0,
-  //   numDisLikes: 0
-  // };
 
   render() {
+    console.log("propos of Quote", this.props)
     const {
       quoteText,
       quoteAuthor,
       likedness,
-      numLikes,
-      numDisLikes,
       handleClick
     } = this.props;
 
     return (
-      <div>
-        <h2>
-          Liked: {numLikes}/ DisLiked: {numDisLikes}
-        </h2>
+      <div>        
         <p style={{ color: likedness }}>
           {quoteText}
           <br></br>By:
