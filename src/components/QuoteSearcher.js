@@ -49,30 +49,3 @@ export default class QuoteSearcher extends Component {
     );
   }
 }
-
-// const quotes = Object.values(quoteData)
-
-// // const quotes = quoteData.map(quote => quote)
-// // console.log(quotes)
-
-// const quoteText = quoteData.map(quote => quote.quoteText)
-// const quoteAuthor = quoteData.map(quote => quote.quoteAuthor)
-// console.log("quoteAuthor", quoteAuthor)
-// console.log("quoteText", quoteText )
-
-// const rQuote = {};
-// rQuote[quote.quoteText] = quote.quoteAuthor;
-// return rQuote;
-
-
-// const quotes = quoteData.map(quote => {
-//   this.setState({
-//     quotes: [
-//       ...this.state.quotes,
-//       {
-//         text: quote.quoteText,
-//         author: quote.quoteAuthor
-//       }
-//     ]       
-//   })
-// })
